@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/svu.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="/"><img src="/images/_MG_5649.jpg" alt=""></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars text-white"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item ps-lg-3">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item ps-lg-3">
+            <a class="nav-link" href="/html/products.html">Products</a>
+          </li>
+          <li class="nav-item ps-lg-3">
+            <a id="signInLink" class="nav-link" href="/html/signIn.html">Sign In</a>
+          </li>
+          <li class="nav-item ps-lg-3">
+            <a id="cartIcon" class="nav-link" href="/html/card.html"><i class="fa-solid fa-cart-plus"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <div class="checkout_container">
+        <form id="signupForm">
+            <h3>Sign Up</h3>
+            <input type="text" placeholder="First name" required name="first_name">
+            <input type="text" placeholder="Last Name" required name="last_name">
+            <input type="email" placeholder="Email" required name="email">
+            <input type="password" placeholder="Password" required name="password">
+            <p style="text-align: center;">Already have an account? <a href="/html/signIn.html">Sign In</a></p>
+            <input type="submit" value="Submit" id="submit_handler" class="sign-up-button">
+            <div id="loader" class="loader"></div>
+        </form>
+    </div>
+    <!-- start foooter -->
+    <div class="footer">
+        <div class="container">
+            <div class="social-media">
+                <div><i class="fa-brands fa-facebook"></i></div>
+                <div><i class="fa-brands fa-whatsapp"></i></div>
+                <div><i class="fa-brands fa-twitter"></i></div>
+                <div><i class="fa-brands fa-youtube"></i></div>
+            </div>
+            <div class="links">
+                <a href="#">Home</a>
+                <a href="#">Products</a>
+                <a href="#">Cheakout</a>
+                <a href="#">About us</a>
+            </div>
+        </div>
+    </div>
+    <div class="cory_right">
+        &copy; 2023 All right reserved .
+    </div>
+
+    <!-- end foooter -->
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/all.min.js"></script>
+    <script src="/javascript.js"></script>
+</body>
+
+</html>

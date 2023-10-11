@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/all.min.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/svu.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+  <title>Document</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="/"><img src="/images/_MG_5649.jpg" alt=""></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars text-white"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item ps-lg-3">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item ps-lg-3">
+            <a class="nav-link" href="/html/products.html">Products</a>
+          </li>
+          <li class="nav-item ps-lg-3">
+            <a id="signInLink" class="nav-link" href="/html/signIn.html">Sign In</a>
+          </li>
+          <li class="nav-item ps-lg-3">
+            <a id="cartIcon" class="nav-link" href="/html/card.html"><i class="fa-solid fa-cart-plus"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- if there is no product  -->
+  <div id="card_container" class="card_container">
+    <div class="no_product">
+      <a href="/html/products.html">You have no product in your shop! Start adding some</a>
+    </div>
+  </div>
+  <!-- if there is product  -->
+  <div id="products_card" class="card_product"></div>
+  <div style="text-align: center;margin-bottom: 20px;">
+    <button class="ckeckout_button">Checkout</button>
+  </div>
+
+  <!-- start foooter -->
+  <div class="footer">
+    <div class="container">
+      <div class="social-media">
+        <div><i class="fa-brands fa-facebook"></i></div>
+        <div><i class="fa-brands fa-whatsapp"></i></div>
+        <div><i class="fa-brands fa-twitter"></i></div>
+        <div><i class="fa-brands fa-youtube"></i></div>
+      </div>
+      <div class="links">
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">Cheakout</a>
+        <a href="#">About us</a>
+      </div>
+    </div>
+  </div>
+  <div class="cory_right">
+    &copy; 2023 All right reserved .
+  </div>
+  <!-- end foooter -->
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/all.min.js"></script>
+  <script src="/javascript.js"></script>
+  <script>
+    // Fetch data from the API
+    const token = sessionStorage.getItem("token")
+    fetch('http://svu-store.mhdanas.com/api/my_orders', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Check if the response is an empty array
+        console.log(data.orders)
+        if (data.length === 0) {
+          // Hide the products card and show the no_product message
+          document.getElementById('products_card').style.display = 'none';
+          document.getElementById('card_container').style.display = 'block';
+        } else {
+          // Hide the no_product message and display the products card
+          document.getElementById('card_container').style.display = 'none';
+          document.getElementById('products_card').style.display = 'flex';
+
+          // Loop through the data and create HTML elements to display the products
+          const productsCard = document.getElementById('products_card');
+          data.orders.forEach(order => {
+            order.items.forEach(item => {
+              const productElement = document.createElement('div');
+
+              const imageElement = document.createElement('img');
+              imageElement.src = `http://svu-store.mhdanas.com/${item.product.image}`;
+              productElement.appendChild(imageElement);
+
+              const amountElement = document.createElement('p');
+              amountElement.textContent = `Amount: ${item.amount}`;
+              productElement.appendChild(amountElement);
+
+              const priceElement = document.createElement('p');
+              priceElement.textContent = `Price: ${item.price}`;
+              productElement.appendChild(priceElement);
+
+              const addButton = document.createElement('button');
+              addButton.textContent = '+';
+              addButton.addEventListener('click', () => {
+                item.amount++;
+                amountElement.textContent = `Amount: ${item.amount}`;
+              });
+              productElement.appendChild(addButton);
+
+              const subtractButton = document.createElement('button');
+              subtractButton.textContent = '-';
+              subtractButton.addEventListener('click', () => {
+                if (item.amount > 0) {
+                  item.amount--;
+                  amountElement.textContent = `Amount: ${item.amount}`;
+                }
+              });
+              productElement.appendChild(subtractButton);
+
+              productsCard.appendChild(productElement);
+            });
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // ...
+
+      // Add a click event listener to the checkout button
+      const checkoutButton = document.querySelector('.ckeckout_button');
+      checkoutButton.addEventListener('click', () => {
+        // Navigate to the home page
+        window.location.href = '/';
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "bootstrap-5.0.2-dist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "javascript.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.5.1",
+    "swiper": "^10.3.1"
+  }
+}
